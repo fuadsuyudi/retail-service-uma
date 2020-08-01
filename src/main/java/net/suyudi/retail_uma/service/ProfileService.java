@@ -2,7 +2,6 @@ package net.suyudi.retail_uma.service;
 
 import net.suyudi.retail_uma.dto.request.UserProfileRequest;
 import net.suyudi.retail_uma.dto.response.BaseResponse;
-import net.suyudi.retail_uma.model.Profile;
 
 public interface ProfileService {
 

@@ -3,7 +3,6 @@ package net.suyudi.retail_uma.service;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 
-import net.suyudi.retail_uma.dto.request.UserProfileRequest;
 import net.suyudi.retail_uma.dto.request.UserRegisterRequest;
 import net.suyudi.retail_uma.dto.response.BaseResponse;
 import net.suyudi.retail_uma.model.User;

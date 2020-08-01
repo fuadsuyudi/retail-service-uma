@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.ApiImplicitParam;
 import net.suyudi.retail_uma.dto.request.RoleRequest;
 import net.suyudi.retail_uma.dto.response.BaseResponse;
 import net.suyudi.retail_uma.service.RoleService;

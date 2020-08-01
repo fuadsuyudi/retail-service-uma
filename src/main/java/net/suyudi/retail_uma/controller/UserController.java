@@ -1,23 +1,17 @@
 package net.suyudi.retail_uma.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.web.bind.annotation.*;
 
 import net.suyudi.retail_uma.dto.request.LoginRequest;
-import net.suyudi.retail_uma.dto.request.UserProfileRequest;
 import net.suyudi.retail_uma.dto.request.UserRegisterRequest;
 import net.suyudi.retail_uma.dto.response.BaseResponse;
 import net.suyudi.retail_uma.exception.BadRequestException;
-import net.suyudi.retail_uma.exception.InternalServerErrorException;
-import net.suyudi.retail_uma.exception.NotFoundException;
 import net.suyudi.retail_uma.exception.UnprocessableEntityException;
 import net.suyudi.retail_uma.model.User;
-import net.suyudi.retail_uma.service.ProfileService;
 import net.suyudi.retail_uma.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,9 +30,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private ProfileService profileService;
 
     @GetMapping("me")
     public Object returnMe() {

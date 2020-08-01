@@ -1,8 +1,5 @@
 package net.suyudi.retail_uma.dto.request;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 

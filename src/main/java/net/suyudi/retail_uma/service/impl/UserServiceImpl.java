@@ -2,7 +2,6 @@ package net.suyudi.retail_uma.service.impl;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,10 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.AuthorizationRequest;
@@ -33,7 +29,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 
 import net.suyudi.retail_uma.config.security.RestConfiguration;
-import net.suyudi.retail_uma.dto.request.UserProfileRequest;
 import net.suyudi.retail_uma.dto.request.UserRegisterRequest;
 import net.suyudi.retail_uma.dto.response.BaseResponse;
 import net.suyudi.retail_uma.exception.*;
@@ -88,8 +83,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public BaseResponse createNewUser(UserRegisterRequest request) {
         try {
-            // PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
             Role role = roleService.findByLevel(LEVEL_OWNER);
             if (role == null) {
                 throw new InternalServerErrorException();
@@ -246,7 +239,7 @@ public class UserServiceImpl implements UserService {
         OAuth2AccessToken token = tokenServices().createAccessToken(authenticationRequest);
 
         Map<String, Object> adInfo = new HashMap<>();
-        // adInfo.put("refresh_token", null);
+        adInfo.put("refresh_token", null);
         adInfo.put("role", null);
 
         try {
@@ -374,9 +367,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public BaseResponse changePassword(Long id, String password) {
-
-        // PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
         User user = userRepository.findById(id).orElseThrow(() -> new UnprocessableEntityException());
 
         user.setPassword(passwordEncoder.encode(password));
