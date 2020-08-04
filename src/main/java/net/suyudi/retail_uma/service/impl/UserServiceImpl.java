@@ -239,13 +239,13 @@ public class UserServiceImpl implements UserService {
         OAuth2AccessToken token = tokenServices().createAccessToken(authenticationRequest);
 
         Map<String, Object> adInfo = new HashMap<>();
-        adInfo.put("refresh_token", null);
+        // adInfo.put("refresh_token", null);
         adInfo.put("role", null);
 
         try {
             User user = (User) authentication.getPrincipal();
-            adInfo.put("refresh_token", token.getRefreshToken());
-            adInfo.put("role", user.getRole().getName());
+            // adInfo.put("refresh_token", token.getRefreshToken());
+            adInfo.put("role", user.getRole());
         } catch (Exception e) {
             e.printStackTrace();
         }

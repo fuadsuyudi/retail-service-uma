@@ -1,5 +1,7 @@
 package net.suyudi.retail_uma.config.security;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
@@ -42,7 +47,7 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
     //     http.exceptionHandling()
     //         .accessDeniedHandler(restAccessDeniedHandler)
     //         .authenticationEntryPoint(restAuthenticationEntryPoint);
-    //     http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+    //     http.cors().and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
     //         .and()
     //             .authorizeRequests()
     //             .antMatchers(
@@ -79,6 +84,20 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 
     public SimpleUrlAuthenticationFailureHandler failureHandler() {
         return new SimpleUrlAuthenticationFailureHandler("/login?error=true");
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "PUT"));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
     }
 
 //    public AuthFilter authenticationFilter() throws Exception {
